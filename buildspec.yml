@@ -9,6 +9,6 @@ phases:
       - apt-get update
       - apt-get install -y docker-ce
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 239302956728.dkr.ecr.us-east-1.amazonaws.com
-      - docker build -t laravel .
-      - docker tag laravel:latest 239302956728.dkr.ecr.us-east-1.amazonaws.com/laravel:latest
-      - docker push 239302956728.dkr.ecr.us-east-1.amazonaws.com/laravel:latest
+      - sudo docker build -t laravel .
+      - sudo docker tag laravel:latest 239302956728.dkr.ecr.us-east-1.amazonaws.com/laravel:latest
+      - sudo docker push 239302956728.dkr.ecr.us-east-1.amazonaws.com/laravel:latest
