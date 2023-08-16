@@ -8,7 +8,6 @@ phases:
       - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
       - apt-get update
       - apt-get install -y docker-ce
-      - sudo service docker start
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 239302956728.dkr.ecr.us-east-1.amazonaws.com
       - sudo docker build -t laravel .
       - sudo docker tag laravel:latest 239302956728.dkr.ecr.us-east-1.amazonaws.com/laravel:latest
