@@ -1,27 +1,14 @@
 version: 0.2
-
 phases:
-  install:
-    runtime-versions:
-      php: 7.4
-    commands:
-      - echo "Installing Composer..."
-      - curl -sS https://getcomposer.org/installer | php
-      - mv composer.phar /usr/local/bin/composer
-  pre_build:
-    commands:
-      - echo "Installing dependencies..."
-      - composer install --no-interaction --no-progress
-      - cp .env.example .env
-      - php artisan key:generate
   build:
     commands:
-      - echo "Running tests..."
-      - php vendor/bin/phpunit
-  post_build:
-    commands:
-      - echo "Build completed successfully!"
-
-artifacts:
-  files:
-    - '**/*'
+      - apt-get update
+      - apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release
+      - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+      - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+      - apt-get update
+      - apt-get install -y docker-ce
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 239302956728.dkr.ecr.us-east-1.amazonaws.com
+      - docker build -t laravel .
+      - docker tag laravel:latest 239302956728.dkr.ecr.us-east-1.amazonaws.com/laravel:latest
+      - docker push 239302956728.dkr.ecr.us-east-1.amazonaws.com/laravel:latest
