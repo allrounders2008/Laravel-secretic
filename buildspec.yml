@@ -9,6 +9,7 @@ phases:
       - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
       - apt-get update
       - apt-get -y install docker-ce # Install Docker
+      - apt install -y aws-cli
 
   pre_build:
     commands:
