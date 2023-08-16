@@ -1,1 +1,27 @@
+version: 0.2
 
+phases:
+  install:
+    runtime-versions:
+      php: 7.4
+    commands:
+      - echo "Installing Composer..."
+      - curl -sS https://getcomposer.org/installer | php
+      - mv composer.phar /usr/local/bin/composer
+  pre_build:
+    commands:
+      - echo "Installing dependencies..."
+      - composer install --no-interaction --no-progress
+      - cp .env.example .env
+      - php artisan key:generate
+  build:
+    commands:
+      - echo "Running tests..."
+      - php vendor/bin/phpunit
+  post_build:
+    commands:
+      - echo "Build completed successfully!"
+
+artifacts:
+  files:
+    - '**/*'
