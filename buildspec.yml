@@ -2,8 +2,6 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      docker: 20 # Use the version of Docker you want to install
     commands:
       - apt-get update
       - apt-get -y install apt-transport-https ca-certificates curl software-properties-common
