@@ -13,7 +13,7 @@ services:
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
-            - ./:/var/www
+            - ${AWS_BUCKET}/app:/var/www
         networks:
             - secretic
 
@@ -30,6 +30,7 @@ services:
             SERVICE_NAME: mysql
         volumes:
             - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+            - ${AWS_BUCKET}/mysql:/var/lib/mysql
         networks:
             - secretic
 
@@ -40,10 +41,11 @@ services:
         ports:
             - 8000:80
         volumes:
-            - ./:/var/www
+            - ${AWS_BUCKET}/app:/var/www
             - ./docker-compose/nginx:/etc/nginx/conf.d
         networks:
             - secretic
+  
 
 networks:
     secretic:
