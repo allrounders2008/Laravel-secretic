@@ -16,12 +16,15 @@ phases:
     commands:
       - mv .env.ci .env
       - echo Logging in to Docker Hub...
-      - docker plugin install rexray/s3fs:latest REXRAY_LOGLEVEL=debug S3FS_ACCESSKEY= --grant-all-permissions
+      - docker plugin install rexray/s3fs:latest --grant-all-permissions
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 239302956728.dkr.ecr.us-east-1.amazonaws.com
 
   build:
     commands:
+      - docker compose build --no-cache
       - docker-compose up --build -d
+      - docker compose exec app composer install
+      - docker compose exec app ./artisan migrate:fresh --seed
 
   post_build:
     commands:
