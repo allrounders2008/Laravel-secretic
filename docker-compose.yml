@@ -12,7 +12,7 @@ services:
         container_name: secretic-app
         restart: unless-stopped
         working_dir: /var/www/
-        volumes:
+       # volumes:
   #          - s3vol/app:/var/www
         networks:
             - secretic
