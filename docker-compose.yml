@@ -13,7 +13,7 @@ services:
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
-            - s3vol/app:/var/www
+  #          - s3vol/app:/var/www
         networks:
             - secretic
 
@@ -30,7 +30,7 @@ services:
             SERVICE_NAME: mysql
         volumes:
             - ./docker-compose/mysql:/docker-entrypoint-initdb.d
-            - s3vol/mysql:/var/lib/mysql
+ #           - s3vol/mysql:/var/lib/mysql
         networks:
             - secretic
 
@@ -41,20 +41,20 @@ services:
         ports:
             - 8000:80
         volumes:
-            - s3vol/app:/var/www
+ #           - s3vol/app:/var/www
             - ./docker-compose/nginx:/etc/nginx/conf.d
         networks:
             - secretic
   
 
-volumes:
-  s3vol:
-    driver: rexray/s3fs
-    driver_opts:
-      S3FS_OPTIONS: ${S3FS_OPTIONS}
-      S3FS_BUCKET: ${AWS_BUCKET}
-      S3FS_ACCESSKEY: ${AWS_ACCESS_KEY_ID}
-      S3FS_SECRETKEY: ${AWS_SECRET_ACCESS_KEY}
+# volumes:
+#   s3vol:
+#     driver: rexray/s3fs
+#     driver_opts:
+#       S3FS_OPTIONS: ${S3FS_OPTIONS}
+#       S3FS_BUCKET: ${AWS_BUCKET}
+#       S3FS_ACCESSKEY: ${AWS_ACCESS_KEY_ID}
+#       S3FS_SECRETKEY: ${AWS_SECRET_ACCESS_KEY}
 
 networks:
     secretic:
