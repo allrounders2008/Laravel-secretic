@@ -13,7 +13,7 @@ services:
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
-            - efs/app:/var/www
+            - efs:/var/www
         networks:
             - secretic
 
@@ -30,7 +30,7 @@ services:
             SERVICE_NAME: mysql
         volumes:
             - ./docker-compose/mysql:/docker-entrypoint-initdb.d
-            - efs/mysql:/var/lib/mysql
+            - efs:/var/lib/mysql
         networks:
             - secretic
 
@@ -41,7 +41,7 @@ services:
         ports:
             - 8000:80
         volumes:
-           - efs/app:/var/www
+           - efs:/var/www
             - ./docker-compose/nginx:/etc/nginx/conf.d
         networks:
             - secretic
