@@ -46,7 +46,6 @@ services:
         networks:
             - secretic
   
-
 volumes:
   efs:
     driver: local

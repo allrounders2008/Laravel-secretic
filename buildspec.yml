@@ -23,8 +23,3 @@ phases:
       - docker-compose up --build -d
       - docker compose exec app composer install
       - docker compose exec app ./artisan migrate:fresh --seed
-
-  post_build:
-    commands:
-      - echo Building Docker images, pushing to Docker Hub, etc.
-      - docker-compose push
