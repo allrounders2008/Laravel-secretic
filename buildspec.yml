@@ -19,6 +19,7 @@ phases:
 
   build:
     commands:
+      - whoami
       - docker compose build --no-cache
       - docker-compose up --build -d
       - docker compose exec app composer install
