@@ -1,5 +1,4 @@
-FROM php:8.2-fpm
-
+FROM 239302956728.dkr.ecr.us-east-1.amazonaws.com/php:8.2-fpm
 # Arguments defined in docker-compose.yml
 ARG user=sammy
 ARG uid=1000
