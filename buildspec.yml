@@ -23,3 +23,13 @@ phases:
       - docker-compose up --build -d
       - docker compose exec app composer install
       - docker compose exec app ./artisan migrate:fresh --seed
+      - docker commit app app:v1
+      - docker commit db db:v1
+      - docker commit nginx nginx:v1
+      - docker tag app:v1 239302956728.dkr.ecr.us-east-1.amazonaws.com/app:v1
+      - docker tag db:v1 239302956728.dkr.ecr.us-east-1.amazonaws.com/db:v1
+      - docker tag nginx:v1 239302956728.dkr.ecr.us-east-1.amazonaws.com/nginx:v
+      - docker push app:v1 239302956728.dkr.ecr.us-east-1.amazonaws.com/app:v1
+      - docker push db:v1 239302956728.dkr.ecr.us-east-1.amazonaws.com/db:v1
+      - docker push nginx:v1 239302956728.dkr.ecr.us-east-1.amazonaws.com/nginx:v1
+ 

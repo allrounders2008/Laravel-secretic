@@ -18,7 +18,7 @@ services:
             - secretic
 
     db:
-        image: mysql:8.0
+        image: 239302956728.dkr.ecr.us-east-1.amazonaws.com/mysql:8.0
         container_name: secretic-db
         restart: unless-stopped
         environment:
@@ -35,7 +35,7 @@ services:
             - secretic
 
     nginx:
-        image: nginx:1.25-alpine
+        image: 239302956728.dkr.ecr.us-east-1.amazonaws.com/nginx:1.25-alpine
         container_name: secretic-nginx
         restart: unless-stopped
         ports:
