@@ -13,7 +13,7 @@ services:
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
-            - ./local-folder:/var/www
+            - ./:/var/www
         networks:
             - secretic
 
@@ -29,8 +29,7 @@ services:
             SERVICE_TAGS: dev
             SERVICE_NAME: mysql
         volumes:
-            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
-            - ./local-folder/mysql:/var/lib/mysql
+            - ./docker-compose/mysql:/docker-entrypoint-initdb.d 
         networks:
             - secretic
 
@@ -41,7 +40,7 @@ services:
         ports:
             - 8000:80
         volumes:
-           - ./local-folder:/var/www
+            - ./:/var/www
             - ./docker-compose/nginx:/etc/nginx/conf.d
         networks:
             - secretic
